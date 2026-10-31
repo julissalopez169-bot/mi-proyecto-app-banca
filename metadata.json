@@ -1,0 +1,7 @@
+{
+  "name": "Banca Nova",
+  "description": "Banca digital moderna Banca Nova Honduras en Lempiras (HNL) con transferencias en tiempo real entre dispositivos y base de datos Firestore.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+

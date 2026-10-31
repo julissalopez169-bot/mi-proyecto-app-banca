@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Banca Nova</string>
+    <string name="currency_hnl">HNL</string>
+    <string name="currency_symbol">L</string>
+    <string name="tagline">Banca digital moderna e innovadora</string>
+    <string name="biometric_prompt_title">Autenticación Banca Nova</string>
+    <string name="biometric_prompt_subtitle">Confirma tu huella dactilar o rostro para acceder</string>
+    <string name="biometric_prompt_negative">Usar PIN de seguridad</string>
+    <string name="channel_transfers_name">Transferencias y Pagos</string>
+    <string name="channel_transfers_desc">Notificaciones en tiempo real sobre transferencias enviadas y recibidas</string>
+    <string name="channel_security_name">Seguridad y Accesos</string>
+    <string name="channel_security_desc">Alertas de seguridad, inicios de sesión y autenticación biométrica</string>
+    <string name="channel_cards_name">Alertas de Tarjetas</string>
+    <string name="channel_cards_desc">Notificaciones de compras, bloqueos y límites de tarjetas</string>
+</resources>

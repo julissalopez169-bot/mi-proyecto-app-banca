@@ -1,0 +1,130 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "Perfil y cuenta bancaria de usuario registrado en Banca Nova",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "email": { "type": "string" },
+        "username": { "type": "string" },
+        "phone": { "type": "string" },
+        "accountNumber": { "type": "string" },
+        "balance": { "type": "number" },
+        "savingsBalance": { "type": "number" },
+        "role": { "type": "string", "enum": ["client", "admin", "superadmin"] },
+        "accountType": { "type": "string", "enum": ["Personal", "Business", "Black"] },
+        "status": { "type": "string", "enum": ["active", "frozen", "blocked"] },
+        "cardLast4": { "type": "string" },
+        "cardTheme": { "type": "string" },
+        "enrolledFaceUrl": { "type": "string" },
+        "faceEnrolledAt": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["email", "accountNumber", "balance"]
+    },
+    "Transaction": {
+      "title": "Transaction",
+      "description": "Registro de movimiento bancario interbancario o débito en Lempiras",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "type": { "type": "string", "enum": ["income", "expense", "transfer", "credit_assigned", "balance_adjustment"] },
+        "amount": { "type": "number" },
+        "description": { "type": "string" },
+        "category": { "type": "string" },
+        "timestamp": { "type": "string" },
+        "sender": { "type": "string" },
+        "receiver": { "type": "string" },
+        "concept": { "type": "string" }
+      },
+      "required": ["amount", "type", "description", "timestamp"]
+    },
+    "SystemSettings": {
+      "title": "SystemSettings",
+      "description": "Configuraciones globales del sistema de bóveda bancaria",
+      "type": "object",
+      "properties": {
+        "bankVaultReserve": { "type": "number" },
+        "savingsApy": { "type": "number" },
+        "mortgageRateTin": { "type": "number" },
+        "mortgageRateTae": { "type": "number" },
+        "maintenanceMode": { "type": "boolean" },
+        "systemNotice": {
+          "type": "object",
+          "properties": {
+            "active": { "type": "boolean" },
+            "title": { "type": "string" },
+            "message": { "type": "string" },
+            "type": { "type": "string" }
+          }
+        },
+        "plans": { "type": "object" },
+        "branding": {
+          "type": "object",
+          "properties": {
+            "companyName": { "type": "string" },
+            "subtitle": { "type": "string" },
+            "logoUrl": { "type": "string" },
+            "logoType": { "type": "string" },
+            "updatedAt": { "type": "number" }
+          }
+        }
+      }
+    },
+    "CreditLog": {
+      "title": "CreditLog",
+      "description": "Auditoría de asignación administrativa de crédito",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "adminEmail": { "type": "string" },
+        "userId": { "type": "string" },
+        "amount": { "type": "number" },
+        "previousBalance": { "type": "number" },
+        "newBalance": { "type": "number" },
+        "reason": { "type": "string" },
+        "timestamp": { "type": "string" }
+      },
+      "required": ["adminEmail", "userId", "amount", "timestamp"]
+    },
+    "ThemeRequest": {
+      "title": "ThemeRequest",
+      "description": "Solicitud de personalización de tarjeta de crédito",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "userName": { "type": "string" },
+        "theme": { "type": "string" },
+        "status": { "type": "string", "enum": ["pending", "approved", "rejected"] },
+        "requestedAt": { "type": "string" }
+      },
+      "required": ["userId", "theme", "status", "requestedAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/User" },
+      "description": "Colección de perfiles bancarios de usuario"
+    },
+    "/transactions/{transactionId}": {
+      "schema": { "$ref": "#/entities/Transaction" },
+      "description": "Colección de transacciones y transferencias bancarias"
+    },
+    "/system_settings/{settingId}": {
+      "schema": { "$ref": "#/entities/SystemSettings" },
+      "description": "Configuraciones globales del banco"
+    },
+    "/credit_logs/{logId}": {
+      "schema": { "$ref": "#/entities/CreditLog" },
+      "description": "Registro de auditoría de fondos asignados por la administración"
+    },
+    "/theme_requests/{requestId}": {
+      "schema": { "$ref": "#/entities/ThemeRequest" },
+      "description": "Solicitudes de cambio de tema de tarjeta"
+    }
+  }
+}
